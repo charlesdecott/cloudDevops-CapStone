@@ -11,7 +11,7 @@ pipeline {
       steps {
         withCredentials(bindings: [usernamePassword( credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
           sh 'echo "the value of username is ${USERNAME} and password id ${PASSWORD}"'
-          sh "sudo docker login -u ${USERNAME} -p ${PASSWORD}"
+          sh "docker login -u ${USERNAME} -p ${PASSWORD}"
           sh 'docker build --tag=charlesdecott/capstone:latest .'
         }
 
