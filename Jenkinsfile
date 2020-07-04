@@ -36,18 +36,11 @@ pipeline {
        	 	}
         }
 	  
-		stage('Build Docker Image') {
-			steps {
-				app = docker.build("charlesdecott/capstone")
-			}
-		}
+		
 
 		stage('Push Image To Dockerhub') {
 			steps {
-				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            				app.push("latest")
-					
-				}
+				sh 'docker push charlesdecott/capstone:latest'
 			}
 		}
 
