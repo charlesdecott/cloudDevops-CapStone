@@ -35,11 +35,11 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    
+	 
     stage('Set Current kubectl Context') {
       steps {
-        withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh '''kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstone'''
+        withAWS(region: 'eu-west-1', credentials: 'aws-static') {
+          sh '''kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstoneEKS'''
         }
 
       }
@@ -57,9 +57,7 @@ pipeline {
     stage('Deploy Green Container') {
       steps {
         withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh '''
-						kubectl apply -f ./green-controller.json
-					'''
+          sh '''kubectl apply -f ./green-controller.json'''
         }
 
       }
@@ -68,9 +66,7 @@ pipeline {
     stage('Create the service in the cluster, redirect to blue') {
       steps {
         withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh '''
-						kubectl apply -f ./blue-service.json
-					'''
+          sh '''kubectl apply -f ./blue-service.json'''
         }
 
       }
@@ -85,9 +81,7 @@ pipeline {
     stage('Create the service in the cluster, redirect to green') {
       steps {
         withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh '''
-						kubectl apply -f ./green-service.json
-					'''
+          sh '''kubectl apply -f ./green-service.json'''
         }
 
       }
@@ -98,5 +92,4 @@ pipeline {
 	 
 	 
 	 
-  }
 }
