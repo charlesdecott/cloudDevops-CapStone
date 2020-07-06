@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Lint HTML') {
       steps {
-        sh "tidy -q -e *.html"
+        sh 'tidy -q -e *.html'
       }
     }
 
@@ -36,7 +36,7 @@ pipeline {
     stage('Set Current kubectl Context') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh "aws eks --region eu-west-1 update-kubeconfig --name capstoneEKS"
+          sh 'kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstoneEKS'
         }
 
       }
@@ -45,7 +45,7 @@ pipeline {
     stage('Deploy Blue Container') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh "kubectl apply -f ./blue-controller.json"
+          sh 'kubectl apply -f ./blue-controller.json'
         }
 
       }
@@ -54,7 +54,7 @@ pipeline {
     stage('Deploy Green Container') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh "kubectl apply -f ./green-controller.json"
+          sh 'kubectl apply -f ./green-controller.json'
         }
 
       }
@@ -63,7 +63,7 @@ pipeline {
     stage('Create the service in the cluster, redirect to blue') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh "kubectl apply -f ./blue-service.json"
+          sh 'kubectl apply -f ./blue-service.json'
         }
 
       }
@@ -71,14 +71,14 @@ pipeline {
 
     stage('Wait user approve') {
       steps {
-        input "Ready to redirect traffic to green?"
+        input 'Ready to redirect traffic to green?'
       }
     }
 
     stage('Create the service in the cluster, redirect to green') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh "kubectl apply -f ./green-service.json"
+          sh 'kubectl apply -f ./green-service.json'
         }
 
       }
