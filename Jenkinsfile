@@ -36,7 +36,7 @@ pipeline {
     stage('Set Current kubectl Context') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh '''kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstoneEKS
+          sh '''kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstoneES
 
 '''
         }
