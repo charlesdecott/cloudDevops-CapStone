@@ -38,7 +38,6 @@ pipeline {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
           sh '''kubectl config use-context arn:aws:eks:eu-west-1:527034694658:cluster/capstoneEKS
 
-echo aws sts get-caller-identity
 '''
         }
 
