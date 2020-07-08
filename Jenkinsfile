@@ -36,7 +36,7 @@ pipeline {
     stage('Set Current kubectl Context') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh 'aws --region eu-west-1 eks update-kubeconfig --name capstoneEKS --role-arn arn:aws:iam::527034694658:role/eksctl-capstoneEKS-cluster-ServiceRole-B5XKMMD3NX1N'
+          sh 'kubectl config use-contex arn:aws:eks:eu-west-1:527034694658:cluster/capstoneEKS'
         }
 
       }
