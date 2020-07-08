@@ -36,7 +36,7 @@ pipeline {
     stage('Set Current kubectl Context') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh 'aws --region eu-west-1 eks update-kubeconfig --name capstoneEKS --role-arn arn:aws:iam::527034694658:role/eksctl-capstone-cluster-ServiceRole-186CPCPBG7YWL'
+          sh 'aws --region eu-west-1 eks update-kubeconfig --name capstoneEKS --role-arn arn:aws:iam::527034694658:role/eksctl-capstoneEKS-cluster-ServiceRole-B5XKMMD3NX1N'
         }
 
       }
@@ -45,9 +45,7 @@ pipeline {
     stage('Deploy Blue Container') {
       steps {
         withAWS(region: 'eu-west-1', credentials: 'aws-static') {
-          sh '''aws --region eu-west-1 eks update-kubeconfig --name capstoneEKS --role-arn arn:aws:iam::527034694658:role/eksctl-capstone-cluster-ServiceRole-186CPCPBG7YWL
-
-kubectl apply -f ./blue-controller.json'''
+          sh '''kubectl apply -f ./blue-controller.json'''
         }
 
       }
