@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"green",
-                  "image":"charlesdecott/capstone",
+                  "image":"nginxdemos/hello",
                   "ports":[
                      {
                         "name":"http-server",
