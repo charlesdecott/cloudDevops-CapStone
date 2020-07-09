@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"blue",
-                  "image":"charlesdecott/capstone",
+                  "image":"tutum/hello-world",
                   "ports":[
                      {
                         "name":"http-server",
