@@ -1,6 +1,6 @@
 {
    "kind":"Service",
-   "apiVersion":"v1",
+   "apiVersion":"v1.1",
    "metadata":{
       "name":"bluegreenlb",
       "labels":{
