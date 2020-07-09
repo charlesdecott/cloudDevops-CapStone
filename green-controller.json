@@ -1,6 +1,6 @@
 {
    "kind":"ReplicationController",
-   "apiVersion":"v1",
+   "apiVersion":"v1.1",
    "metadata":{
       "name":"green",
       "labels":{
